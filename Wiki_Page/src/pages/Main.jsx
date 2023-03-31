@@ -1,66 +1,99 @@
+import MainList from "../components/MainList";
+import Button from "../components/Button";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 const Main = () => {
+  const navigate = useNavigate();
+  const wikiList = [
+    {
+      id: 1,
+      title: "안녕하세요",
+      date: "20120210", //고민사안
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 2,
+      title: "김덕배입니다2222.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 3,
+      title: "김덕배입니다3333.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 4,
+      title: "김덕배입니다444.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 5,
+      title: "김덕배입니다5555.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 6,
+      title: "김덕배입니다666.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+    {
+      id: 7,
+      title: "김덕배입니다777.",
+      date: "20120213",
+      content: "오랫동안 행복하게 살고 있습니다.",
+    },
+  ];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const indexOfLast = currentPage * itemsPerPage; // 마지막을 먼저 구함
+  const indexOfFirst = indexOfLast - itemsPerPage; // 제거
+  const currentItems = wikiList.slice(indexOfFirst, indexOfLast); // 슬라이스 활용
+
+  const pageNumbers = calculatePageNumbers(wikiList, itemsPerPage);
+
+  function calculatePageNumbers(wikiList, itemsPerPage) {
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(wikiList.length / itemsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+    return pageNumbers;
+  }
+
   return (
     <div>
-      <section class="text-gray-600 body-font overflow-hidden">
-        <div class="container px-5 py-24 mx-auto">
-          <div class="-my-8 divide-y-2 divide-gray-100">
-            <div class="py-8 flex flex-wrap md:flex-nowrap">
-              <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                <span class="font-semibold title-font text-gray-700">
-                  CATEGORY
-                </span>
-                <span class="mt-1 text-gray-500 text-sm">12 Jun 2019</span>
-              </div>
-              <div class="md:flex-grow">
-                <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                  Bitters hashtag waistcoat fashion axe chia unicorn
-                </h2>
-                <p class="leading-relaxed">
-                  Glossier echo park pug, church-key sartorial biodiesel
-                  vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf
-                  moon party messenger bag selfies, poke vaporware kombucha
-                  lumbersexual pork belly polaroid hoodie portland craft beer.
-                </p>
-              </div>
-            </div>
-            <div class="py-8 flex flex-wrap md:flex-nowrap">
-              <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                <span class="font-semibold title-font text-gray-700">
-                  CATEGORY
-                </span>
-                <span class="mt-1 text-gray-500 text-sm">12 Jun 2019</span>
-              </div>
-              <div class="md:flex-grow">
-                <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                  Meditation bushwick direct trade taxidermy shaman
-                </h2>
-                <p class="leading-relaxed">
-                  Glossier echo park pug, church-key sartorial biodiesel
-                  vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf
-                  moon party messenger bag selfies, poke vaporware kombucha
-                  lumbersexual pork belly polaroid hoodie portland craft beer.
-                </p>
-              </div>
-            </div>
-            <div class="py-8 flex flex-wrap md:flex-nowrap">
-              <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                <span class="font-semibold title-font text-gray-700">
-                  CATEGORY
-                </span>
-                <span class="text-sm text-gray-500">12 Jun 2019</span>
-              </div>
-              <div class="md:flex-grow">
-                <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                  Woke master cleanse drinking vinegar salvia
-                </h2>
-                <p class="leading-relaxed">
-                  Glossier echo park pug, church-key sartorial biodiesel
-                  vexillologist pop-up snackwave ramps cornhole. Marfa 3 wolf
-                  moon party messenger bag selfies, poke vaporware kombucha
-                  lumbersexual pork belly polaroid hoodie portland craft beer.
-                </p>
-              </div>
-            </div>
+      <section className="text-gray-600 body-font overflow-hidden bg-slate-700">
+        <div className="container px-5 py-24 mx-auto bg-orange-400">
+          <div className="flex justify-end">
+            <Button />
+          </div>
+          <div className="divide-y-2 divide-gray-100 bg-lime-700">
+            {currentItems.map((el) => {
+              return <MainList key={el.id} data={el} />;
+            })}
+          </div>
+          <div>
+            {pageNumbers.map((number) => {
+              return (
+                <button
+                  key={number}
+                  onClick={() => setCurrentPage(number)}
+                  className={
+                    currentPage === number
+                      ? "px-3 py-1 mx-1 bg-white rounded-full shadow-md hover:bg-gray-300  shadow-outline ring-2 ring-offset-current ring-offset-2"
+                      : "px-3 py-1 mx-1 bg-white  rounded-full shadow-md hover:bg-gray-300 shadow-outline ring-2  "
+                  }
+                >
+                  {number}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>

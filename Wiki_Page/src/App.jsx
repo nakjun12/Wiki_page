@@ -2,6 +2,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Wiki from "./pages/Wiki";
 import Main from "./pages/Main";
+import Editor from "./pages/Editor";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
   {
     path: "/Wiki/:id",
     element: <Wiki />,
+  },
+  {
+    path: "/editor",
+    element: <Editor />,
   },
 ]);
 function App() {
