@@ -3,10 +3,10 @@ const MainList = ({ data }) => {
 
   return (
     <div className="py-8 title md:flex-grow">
-      <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
+      <h2 className="px-8 text-2xl font-medium text-gray-900 title-font mb-2">
         {data.title}
       </h2>
-      <span className="mt-1 text-gray-500 text-sm">{data.date}</span>
+      {/* <span className="mt-1 text-gray-500 text-sm">{data.date}</span> */}
     </div>
   );
 };

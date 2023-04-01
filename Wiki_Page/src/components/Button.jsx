@@ -1,5 +1,4 @@
 const Button = ({ word = "추가", handler }) => {
-  console.log(word, handler);
   const buttonHandler = () => {
     if (handler) {
       handler();

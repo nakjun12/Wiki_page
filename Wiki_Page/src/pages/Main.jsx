@@ -1,6 +1,6 @@
 import MainList from "../components/MainList";
 import Button from "../components/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router";
 const wikiList = [
   {
@@ -50,13 +50,19 @@ const wikiList = [
 const Main = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [wikiList, setwikiList] = useState([]);
+
+  useLayoutEffect(() => {
     fetch("http://localhost:3001/posts")
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setwikiList(data);
+        console.log(data);
+      })
       .catch((error) => console.error(error));
   }, []);
-  const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 5;
 
   const indexOfLast = currentPage * itemsPerPage; // 마지막을 먼저 구함
