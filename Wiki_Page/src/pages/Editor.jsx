@@ -50,7 +50,6 @@ const Editor = () => {
         onChange={handleContentChange}
         style={{ background: "white", height: "400px" }}
       />
-
       <Button word="입력" handler={handleSave} />
     </section>
   );

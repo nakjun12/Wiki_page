@@ -2,7 +2,7 @@
   "posts": [
     {
       "title": "감자",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "<div>ㅇㅇㅇ <a href=`/wiki'>감자</a></div>",
       "id": 1
     },
     {
