@@ -2,74 +2,78 @@
   "posts": [
     {
       "title": "김치국감자국ㄱㄱ",
-      "content": "김치전 맛있음키아",
-      "id": 1,
-      "trimmedText": "김치전 맛있음ㅇㅇ"
+      "content": "감자 맛있음 감자",
+      "id": 1
     },
     {
-      "title": "김치전",
-      "content": "<p>감자</p>",
+      "title": "감자 맛있음",
+      "content": "ㅇㅇㅇ",
       "id": 2
     },
     {
       "title": "감자김치3",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 3
     },
     {
       "title": "감자",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 4
     },
     {
-      "title": "감자김치5",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "title": "김치전감자",
+      "content": "ㅇㅇㅇ",
       "id": 5
     },
     {
       "title": "감자김치6",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 6
     },
     {
       "title": "감자김치7",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 7
     },
     {
       "title": "감자김치8",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 8
     },
     {
       "title": "감자김치9",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 9
     },
     {
       "title": "감자김치10",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 10
     },
     {
       "title": "감자김치11",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 11
     },
     {
       "title": "감자김치12",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 12
     },
     {
       "title": "감자김치13",
-      "content": "<p>ㅇㅇㅇ</p>",
+      "content": "ㅇㅇㅇ",
       "id": 13
     },
     {
       "title": "김치전 최고요",
-      "content": "<p>우리집이 맛잇음</p>",
+      "content": "ㅇㅇㅇ",
       "id": 14
+    },
+    {
+      "title": "ㄱ입력",
+      "content": "받음 김치",
+      "id": 15
     }
   ]
 }
