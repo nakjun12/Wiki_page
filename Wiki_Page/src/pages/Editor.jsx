@@ -24,14 +24,15 @@ const Editor = () => {
     setTitle(e.target.value);
   };
 
-  const handleContentChange = (content, delta, source, editor) => {
+  const handleContentChange = (content) => {
     setContent(content);
   };
 
   const handleSave = () => {
-    if (checked) {
-      const data = { title, content };
+    const trimmedText = content.replace(/^<p>|<\/p>$/g, "");
+    const data = { title, content: trimmedText };
 
+    if (checked) {
       const id = location.state.data.id;
       fetch(`http://localhost:3001/posts/${id}`, {
         method: "PATCH",
@@ -44,7 +45,6 @@ const Editor = () => {
           console.log(data);
         });
     } else {
-      const data = { title, content };
       fetch("http://localhost:3001/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

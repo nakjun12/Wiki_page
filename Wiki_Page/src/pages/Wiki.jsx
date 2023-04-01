@@ -39,28 +39,31 @@ const dbData = [
 const Wiki = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [wikiList, setwikiList] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
     if (location.state) {
+      setwikiList(location.state.wikiList);
       setTitle(location.state.data.title);
       setContent(location.state.data.content);
-      setChecked(true);
     } else {
-      fetch(`http://localhost:3001/posts/${id}`)
+      fetch("http://localhost:3001/posts")
         .then((response) => response.json())
         .then((data) => {
-          setTitle(data.title);
-          setContent(data.content);
-          console.log(data);
+          setwikiList(data);
+
+          const idData = data.filter((el) => {
+            return el.id === Number(id);
+          });
+          setTitle(idData[0].title);
+          setContent(idData[0].content);
+          console.log(idData);
         });
     }
   }, [location.state, id]);
-
-  // 그냥 url로 접근했을때 문제도 해결할 것
 
   const handlerFix = () => {
     navigate("/editor", { state: { data: { title, content, id } } });
@@ -75,9 +78,7 @@ const Wiki = () => {
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 bg-white text-gray-900 border-2 pb-3">
               {title}
             </h1>
-            <div className="leading-relaxed text-base bg-white">
-              <div dangerouslySetInnerHTML={{ __html: content }} />
-            </div>
+            <div className="leading-relaxed text-base bg-white">{content}</div>
           </div>
         </div>
       </section>
