@@ -1,4 +1,4 @@
-const Button = ({ word = "추가", handler }) => {
+const ButtonComponent = ({ word = "추가", handler }) => {
   const buttonHandler = () => {
     if (handler) {
       handler();
@@ -16,4 +16,4 @@ const Button = ({ word = "추가", handler }) => {
   );
 };
 
-export default Button;
+export default ButtonComponent;

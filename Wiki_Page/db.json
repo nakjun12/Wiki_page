@@ -1,12 +1,12 @@
 {
   "posts": [
     {
-      "title": "감자",
-      "content": "<div>ㅇㅇㅇ <a href=`/wiki'>감자</a></div>",
+      "title": "김치국감자국",
+      "content": "<p>ㅇㅇㅇㅇ1212122</p>",
       "id": 1
     },
     {
-      "title": "감자김치",
+      "title": "감자감자자자",
       "content": "<p>ㅇㅇㅇ</p>",
       "id": 2
     },
@@ -64,16 +64,11 @@
       "title": "감자김치13",
       "content": "<p>ㅇㅇㅇ</p>",
       "id": 13
-    }
-  ],
-  "comments": [
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "title": "김치전 최고요",
+      "content": "<p>우리집이 맛잇음</p>",
+      "id": 14
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

@@ -1,5 +1,5 @@
 import WikiList from "../components/WikiList";
-import Button from "../components/Button";
+import ButtonComponent from "../components/ButtonComponent";
 import { useState, useLayoutEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -26,7 +26,7 @@ const Main = () => {
     <div>
       <section>
         <div className="flex justify-end">
-          <Button handler={handlerNav} />
+          <ButtonComponent handler={handlerNav} />
         </div>
         <WikiList wikiList={wikiList} />
       </section>

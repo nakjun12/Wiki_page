@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Button from "../components/Button";
+import ButtonComponent from "../components/ButtonComponent";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 
 const Editor = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setTitle(location.state.data.title);
+      setContent(location.state.data.content);
+      setChecked(true);
+    }
+  }, [location.state]); // location.state가 변경될 때마다 useEffect가 실행됩니다.
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -18,20 +29,33 @@ const Editor = () => {
   };
 
   const handleSave = () => {
-    const data = { title, content };
-    fetch("http://localhost:3001/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        navigate("/");
-        console.log(data);
-      });
+    if (checked) {
+      const data = { title, content };
 
-    console.log("Title:", title);
-    console.log("Content:", content);
+      const id = location.state.data.id;
+      fetch(`http://localhost:3001/posts/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          navigate(`/wiki/${id}`);
+          console.log(data);
+        });
+    } else {
+      const data = { title, content };
+      fetch("http://localhost:3001/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          navigate("/");
+          console.log(data);
+        });
+    }
   };
 
   return (
@@ -50,7 +74,7 @@ const Editor = () => {
         onChange={handleContentChange}
         style={{ background: "white", height: "400px" }}
       />
-      <Button word="입력" handler={handleSave} />
+      <ButtonComponent word="입력" handler={handleSave} />
     </section>
   );
 };

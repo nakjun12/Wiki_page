@@ -1,5 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import WikiList from "../components/WikiList";
+import ButtonComponent from "../components/ButtonComponent";
+import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+
 const dbData = [
   {
     title: "감자",
@@ -33,26 +37,45 @@ const dbData = [
   },
 ]; //위키 필터 돌려서 dbdata처럼 돌리자
 const Wiki = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [checked, setChecked] = useState(false);
   const location = useLocation();
-  const { wikiList, data } = location.state;
-  // 그냥 url로 접근했을때 문제도 해결할 것
-  const { title, content } = data;
+  const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    if (location.state) {
+      setTitle(location.state.data.title);
+      setContent(location.state.data.content);
+      setChecked(true);
+    } else {
+      fetch(`http://localhost:3001/posts/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setTitle(data.title);
+          setContent(data.content);
+          console.log(data);
+        });
+    }
+  }, [location.state, id]);
 
-  console.log(content, typeof content);
-  // const navigate = useNavigate();
-  // if (!) {
-  //   navigate("/");
-  //   return <></>;
-  // }
+  // 그냥 url로 접근했을때 문제도 해결할 것
+
+  const handlerFix = () => {
+    navigate("/editor", { state: { data: { title, content, id } } });
+  };
+
   return (
     <>
       <section className="text-gray-600 body-font">
+        <ButtonComponent word="수정" handler={handlerFix} />
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-col text-center w-full mb-12">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+          <div className="flex flex-col w-full mb-12">
+            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 bg-white text-gray-900 border-2 pb-3">
               {title}
             </h1>
-            <div className="lg:w-2/3 mx-auto leading-relaxed text-base">
+            <div className="leading-relaxed text-base bg-white">
               <div dangerouslySetInnerHTML={{ __html: content }} />
             </div>
           </div>
