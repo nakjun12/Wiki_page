@@ -1,15 +1,15 @@
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import WikiList from "../components/WikiList";
 import ButtonComponent from "../components/ButtonComponent";
 import { useNavigate } from "react-router";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 //위키 필터 돌려서 dbdata처럼 돌리자
 const Wiki = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [wikiList, setwikiList] = useState([]);
-  const [[first, second, third], setComent] = useState(["", "", ""]);
+
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -41,12 +41,11 @@ const Wiki = () => {
   const includedTitles = wikiList
     .filter((el) => content.includes(el.title))
     .sort((a, b) => b.title.length - a.title.length);
-
+  console.log(includedTitles, content);
   const fixResult = () => {
     const sortedTitles = includedTitles.sort(
       (a, b) => b.title.length - a.title.length
     );
-
     let newContent = content;
     let lastIndex = 0;
 
@@ -56,7 +55,6 @@ const Wiki = () => {
       let match;
 
       while ((match = regex.exec(newContent)) !== null) {
-        console.log("하이");
         if (match.index < lastIndex) {
           continue; // 이미 링크로 변경된 부분은 건너뛰기
         }
@@ -70,17 +68,22 @@ const Wiki = () => {
         lastIndex = match.index + link.length;
       }
     });
-
     console.log(newContent);
+    setContent(newContent);
   };
+
+  useEffect(() => {
+    if (includedTitles.length > 0) fixResult(); // 첫렌더링 시에는 값이 없다.
+  }, [includedTitles.length]);
+
   // "<a href=\"http://localhost:3000/wiki/3\">키아</a>"
-  fixResult();
-  const result = '<a href="http://localhost:3000/wiki/3">키아</a>';
-  const newComent = (
-    <p>
-      감자 싫어요 <Link to=" / ">Home</Link>김치최고
-    </p>
-  );
+
+  // const result = '<a href="http://localhost:3000/wiki/3">키아</a>';
+  // const newComent = (
+  //   <p>
+  //     감자 싫어요 <Link to=" / ">Home</Link>김치최고
+  //   </p>
+  // );
 
   //플랜 1
   // 검증뒤에 성공하면
@@ -102,7 +105,7 @@ const Wiki = () => {
               {title}
             </h1>
             <div
-              dangerouslySetInnerHTML={{ __html: result }}
+              dangerouslySetInnerHTML={{ __html: content }}
               // 위험하지 않은 콘텐츠가 제공되면서도 마크업을 동적으로 생성하기 위한 방법입니다.
               // 하지만 위험한 콘텐츠는 삽입하지 않도록 주의해야 합니다.
             />
