@@ -1,6 +1,6 @@
 import WikiList from "../components/WikiList";
 import ButtonComponent from "../components/ButtonComponent";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const Main = () => {
@@ -8,8 +8,7 @@ const Main = () => {
 
   const [wikiList, setwikiList] = useState([]);
 
-  useLayoutEffect(() => {
-    //비동기로 처리되기때문에 큰차이 없지만 트라이해보았음
+  useEffect(() => {
     fetch("http://localhost:3001/posts")
       .then((response) => response.json())
       .then((data) => {

@@ -1,4 +1,5 @@
 const calculatePageNumbers = (wikiList, currentPage) => {
+  //페이지네이션 계산 함수
   const itemsPerPage = 5;
 
   const indexOfLast = currentPage * itemsPerPage; // 마지막을 먼저 구함

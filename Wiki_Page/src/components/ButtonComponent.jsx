@@ -1,8 +1,8 @@
 const ButtonComponent = ({ word = "추가", handler }) => {
+  // 상황에 맞춰 컴포넌트화하여 사용할 수 있게 핸들러로 컨드롤 함
   const buttonHandler = () => {
     if (handler) {
       handler();
-      //너무빨리옴
     }
   };
 

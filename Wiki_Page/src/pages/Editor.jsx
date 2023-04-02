@@ -18,8 +18,8 @@ const Editor = () => {
       setContent(location.state.data.content);
       setChecked(true);
     }
-  }, [location.state]); // location.state가 변경될 때마다 useEffect가 실행됩니다.
-
+  }, [location.state]);
+  // 수정과 입력일 때 상황을 고려하여 컴포넌트화 목적으로 작성하였음
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -33,6 +33,7 @@ const Editor = () => {
     const data = { title, content: trimmedText };
 
     if (checked) {
+      // 수정과 입력일 때 상황을 고려하여 컴포넌트화 목적으로 작성하였음
       const id = location.state.data.id;
       fetch(`http://localhost:3001/posts/${id}`, {
         method: "PATCH",
