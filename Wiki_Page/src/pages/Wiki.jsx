@@ -41,33 +41,56 @@ const Wiki = () => {
   const includedTitles = wikiList
     .filter((el) => content.includes(el.title))
     .sort((a, b) => b.title.length - a.title.length);
-  console.log(includedTitles, content);
+
   const fixResult = () => {
     const sortedTitles = includedTitles.sort(
       (a, b) => b.title.length - a.title.length
     );
     let newContent = content;
     let lastIndex = 0;
-
+    let matchArray = [];
     sortedTitles.forEach((titleObj) => {
       const { id, title } = titleObj;
       const regex = new RegExp(`${title}`, "g");
       let match;
 
       while ((match = regex.exec(newContent)) !== null) {
-        if (match.index < lastIndex) {
-          continue; // 이미 링크로 변경된 부분은 건너뛰기
+        console.log(match.index);
+        let ischecked = false;
+        for (let i = 0; i < matchArray.length; i += 2) {
+          if (
+            match.index >= matchArray[i] &&
+            match.index < matchArray[i] + matchArray[i + 1]
+          ) {
+            ischecked = true;
+            break; // 이미 링크로 변경된 부분은 건너뛰기 여기서 매치인덱스 바뀜
+          }
         }
+        if (ischecked) continue;
 
         const link = `<a href="http://localhost:3000/wiki/${id}">${title}</a>`;
         newContent =
           newContent.slice(0, match.index) +
           link +
-          newContent.slice(match.index + title.length);
-        console.log(newContent);
+          newContent.slice(match.index + title.length); //마지막거 포함
+
         lastIndex = match.index + link.length;
+        matchArray.push(match.index);
+        matchArray.push(link.length);
+        console.log(match.index, link.length, lastIndex);
+        console.log(matchArray);
+        console.log(newContent);
+        console.log("타이틀", title);
+        for (let i = 0; i < matchArray.length; i += 2) {
+          console.log(match.index, matchArray[i], "비교중");
+          if (match.index < matchArray[i]) {
+            matchArray[i] = matchArray[i] + link.length - 1;
+          }
+        }
+        console.log(matchArray);
       }
     });
+
     console.log(newContent);
     setContent(newContent);
   };
@@ -86,15 +109,10 @@ const Wiki = () => {
   // );
 
   //플랜 1
-  // 검증뒤에 성공하면
-  // 타이틀과 뉴 코멘트 백업
-  // 기존 코멘트로 검증한다.
-
-  //1번 예시 이세돌은 멋있따.
-
-  // 전체 검증하는 법
-  // 만약에 검증되면 replace해줌
-  //같은 것을 만나면 링크로 바꿔주고
+  //감자 감자 맛있음 감자
+  // 그다음은 감자 맛잇음
+  //감자김치 감자 맛있음(변환) 감자김치
+  //감자부터
   return (
     <>
       <section className="text-gray-600 body-font">
