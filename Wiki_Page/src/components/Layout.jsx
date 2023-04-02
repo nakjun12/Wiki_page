@@ -3,8 +3,8 @@ import Header from "./Header";
 const Layout = () => {
   return (
     <div>
-      <div className="text-gray-600 body-font overflow-hidden bg-slate-700">
-        <div className="container px-5 py-24 mx-auto bg-orange-400">
+      <div className="body-font">
+        <div className="container px-5 py-24 mx-auto h-full ">
           <Header />
           <Outlet />
         </div>

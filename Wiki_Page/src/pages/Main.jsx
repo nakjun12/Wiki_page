@@ -25,7 +25,7 @@ const Main = () => {
   return (
     <div>
       <section>
-        <div className="flex justify-end">
+        <div className="flex justify-end mb-2">
           <ButtonComponent handler={handlerNav} />
         </div>
         <WikiList wikiList={wikiList} />

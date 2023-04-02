@@ -10,14 +10,14 @@ const WikiList = ({ wikiList, size = "" }) => {
   );
   return (
     <>
-      <div className="divide-y-2 divide-gray-100 bg-lime-700">
+      <div className="divide-y-2 divide-gray-100 bg-cyan-600">
         {currentItems.map((el) => {
           return (
             <MainList key={el.id} data={el} wikiList={wikiList} size={size} />
           );
         })}
       </div>
-      <div>
+      <div className="mt-4">
         {pageNumbers.map((number) => {
           return (
             <button

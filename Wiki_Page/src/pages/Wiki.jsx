@@ -77,21 +77,21 @@ const Wiki = () => {
         lastIndex = match.index + link.length;
         matchArray.push(match.index);
         matchArray.push(link.length);
-        console.log(match.index, link.length, lastIndex);
-        console.log(matchArray);
-        console.log(newContent);
-        console.log("타이틀", title);
+        // console.log(match.index, link.length, lastIndex);
+        // console.log(matchArray);
+        // console.log(newContent);
+        // console.log("타이틀", title);
         for (let i = 0; i < matchArray.length; i += 2) {
           console.log(match.index, matchArray[i], "비교중");
           if (match.index < matchArray[i]) {
             matchArray[i] = matchArray[i] + link.length - 1;
           }
         }
-        console.log(matchArray);
+        // console.log(matchArray);
       }
     });
 
-    console.log(newContent);
+    // console.log(newContent);
     setContent(newContent);
   };
 
@@ -99,20 +99,6 @@ const Wiki = () => {
     if (includedTitles.length > 0) fixResult(); // 첫렌더링 시에는 값이 없다.
   }, [includedTitles.length]);
 
-  // "<a href=\"http://localhost:3000/wiki/3\">키아</a>"
-
-  // const result = '<a href="http://localhost:3000/wiki/3">키아</a>';
-  // const newComent = (
-  //   <p>
-  //     감자 싫어요 <Link to=" / ">Home</Link>김치최고
-  //   </p>
-  // );
-
-  //플랜 1
-  //감자 감자 맛있음 감자
-  // 그다음은 감자 맛잇음
-  //감자김치 감자 맛있음(변환) 감자김치
-  //감자부터
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -122,11 +108,7 @@ const Wiki = () => {
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 bg-white text-gray-900 border-2 pb-3">
               {title}
             </h1>
-            <div
-              dangerouslySetInnerHTML={{ __html: content }}
-              // 위험하지 않은 콘텐츠가 제공되면서도 마크업을 동적으로 생성하기 위한 방법입니다.
-              // 하지만 위험한 콘텐츠는 삽입하지 않도록 주의해야 합니다.
-            />
+            <div dangerouslySetInnerHTML={{ __html: content }} />
             {content}
           </div>
         </div>

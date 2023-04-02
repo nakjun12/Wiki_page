@@ -69,7 +69,7 @@ const Editor = () => {
       />
 
       <ReactQuill
-        className="mb-12 overflow-y-auto"
+        className="mb-12"
         value={content}
         onChange={handleContentChange}
         style={{ background: "white", height: "400px" }}
